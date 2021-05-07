@@ -1,0 +1,12 @@
+[
+    {
+        "model": "gamerraterapi.review",
+        "pk": 1,
+        "fields": {
+            "review": "Good and fun strategy game. You get excited when you get stones.",
+            "rating": 5,
+            "game": 1,
+            "player": 1
+        }
+    }
+]

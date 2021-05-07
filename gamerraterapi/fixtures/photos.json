@@ -1,0 +1,29 @@
+[
+    {
+        "model": "gamerraterapi.photo",
+        "pk": 1,
+        "fields": {
+            "game": 1,
+            "image_url": "https://images-na.ssl-images-amazon.com/images/I/81%2Bokm4IpfL._AC_SL1500_.jpg",
+            "player": 1
+        }
+    },
+    {
+        "model": "gamerraterapi.photo",
+        "pk": 2,
+        "fields": {
+            "game": 2,
+            "image_url": "https://images-na.ssl-images-amazon.com/images/I/81RTivGRV6L._AC_SL1500_.jpg",
+            "player": 1
+        }
+    },
+    {
+        "model": "gamerraterapi.photo",
+        "pk": 3,
+        "fields": {
+            "game": 3,
+            "image_url": "https://target.scene7.com/is/image/Target/GUEST_e48a7fee-314a-495f-bbf0-4ff2fac5e07a?wid=488&hei=488&fmt=pjpeg",
+            "player": 1
+        }
+    }
+]
