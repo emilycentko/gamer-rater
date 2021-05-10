@@ -3,8 +3,8 @@
         "model": "gamerraterapi.player",
         "pk": 1,
         "fields": {
-            "first_name": "Frodo",
-            "last_name": "Baggins"
+            "user": 1,
+            "bio": "I like games."
         }
     }
 ]
