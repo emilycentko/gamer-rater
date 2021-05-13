@@ -6,7 +6,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
-from gamerraterapi.models import Game, Player
+from gamerraterapi.models import Game, Player, Category
 
 
 class GameView(ViewSet):
@@ -34,8 +34,13 @@ class GameView(ViewSet):
         game.est_play_time = request.data["estPlayTime"]
         game.age_rec = request.data["ageRec"]
 
+
         try:
             game.save()
+            categories = request.data["categories"]
+
+            for category in categories:
+                game.categories.add(category)
             serializer = GameSerializer(game, context={'request': request})
             return Response(serializer.data)
 
@@ -114,12 +119,23 @@ class GameView(ViewSet):
         Returns:
             Response -- JSON serialized list of games
         """
-        # Get all game records from the database
+        
         games = Game.objects.all()
 
         serializer = GameSerializer(
             games, many=True, context={'request': request})
+
         return Response(serializer.data)
+
+class CategorySerializer(serializers.ModelSerializer):
+    """JSON serializer for categories
+
+    Arguments:
+        serializer type
+    """
+    class Meta:
+        model = Category
+        fields = ('id', 'label')
 
 class GameSerializer(serializers.ModelSerializer):
     """JSON serializer for games
@@ -127,8 +143,11 @@ class GameSerializer(serializers.ModelSerializer):
     Arguments:
         serializer type
     """
+
+    categories = CategorySerializer(many=True)
+
     class Meta:
         model = Game
         fields = ('id', 'title', 'description', 'designer', 'year_released',
-        'number_of_players', 'est_play_time', 'age_rec')
+        'number_of_players', 'est_play_time', 'age_rec', 'categories')
         depth = 1
