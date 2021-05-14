@@ -1,4 +1,5 @@
 from django.db import models
+from .review import Review
 
 class Game(models.Model):
 
@@ -11,3 +12,12 @@ class Game(models.Model):
     age_rec = models.IntegerField()
     categories = models.ManyToManyField("Category", through="GameCategory", related_name="games")
     
+    @property
+    def average_rating(self):
+        """Average rating calculated attribute for each game"""
+        ratings = Review.objects.filter(game=self)
+
+        # Sum all of the ratings for the game
+        total_rating = 0
+        for rating in ratings:
+            total_rating += rating.rating
