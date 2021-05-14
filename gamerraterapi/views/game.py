@@ -37,10 +37,8 @@ class GameView(ViewSet):
 
         try:
             game.save()
-            categories = request.data["categories"]
+            game.categories.set(request.data["categories"])
 
-            for category in categories:
-                game.categories.add(category)
             serializer = GameSerializer(game, context={'request': request})
             return Response(serializer.data)
 
@@ -88,6 +86,7 @@ class GameView(ViewSet):
         game.number_of_players = request.data["numberOfPlayers"]
         game.est_play_time = request.data["estPlayTime"]
         game.age_rec = request.data["ageRec"]
+        game.categories = request.data["categories"]
 
         game.save()
 
